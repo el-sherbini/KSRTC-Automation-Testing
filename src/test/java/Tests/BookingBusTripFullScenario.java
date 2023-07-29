@@ -3,12 +3,17 @@ package Tests;
 import Pages.HomePage;
 import Pages.PaymentPage;
 import Pages.ResultsPage;
+import Utils.Helpers;
 import Utils.TestConfig;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
 
 import static Utils.Helpers.selectOptionInCustomDropdown;
 
@@ -59,6 +64,7 @@ public class BookingBusTripFullScenario {
     @Test (dependsOnMethods = "testSelectSeat")
     public void testSelectAvailableSeat() {
         resultsPage.clickAvailableSeatBtn();
+        resultsPage.clickAvailableSeatBtn();
     }
 
     @Test (dependsOnMethods = "testSelectAvailableSeat")
@@ -73,19 +79,29 @@ public class BookingBusTripFullScenario {
         resultsPage.setEmailTxtFld("test@test.com");
     }
 
-    @Test (dependsOnMethods = "testSelectBoardingDroppingPoints")
-    public void testFillPassengerDetails() {
-        resultsPage.setNameTxtFld("test");
-        resultsPage.setAgeTxtFld("25");
+    @DataProvider(name = "passengerData")
+    public Object[][] getPassengerData() {
+        return Helpers.getPassengerData();
+    }
 
-        selectOptionInCustomDropdown(resultsPage.getGenderDropDown(), "MALE");
-        selectOptionInCustomDropdown(resultsPage.getConcessionDropDown(), "GENERAL PUBLIC");
-        selectOptionInCustomDropdown(resultsPage.getCountryDropDown(), "INDIA");
+    @Test (dataProvider = "passengerData", dependsOnMethods = "testSelectBoardingDroppingPoints")
+    public void testFillPassengerDetails(String name, String age, String gender, String concession, String country, int passengerIndex) {
+        resultsPage.setNameTxtFld(name,passengerIndex);
+        resultsPage.setAgeTxtFld(age,passengerIndex);
+
+        selectOptionInCustomDropdown(resultsPage.getGenderDropDown(passengerIndex), gender);
+        selectOptionInCustomDropdown(resultsPage.getConcessionDropDown(passengerIndex), concession);
+        selectOptionInCustomDropdown(resultsPage.getCountryDropDown(passengerIndex), country);
     }
 
     @Test (dependsOnMethods = "testFillPassengerDetails")
     public void testClickMakePayment() {
         resultsPage.clickMakePaymentBtn();
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test (dependsOnMethods = "testClickMakePayment")
@@ -96,4 +112,9 @@ public class BookingBusTripFullScenario {
         paymentPage.setCardExpiryTxtFld("03/26");
         paymentPage.setCardCvvTxtFld("1234");
     }
+
+//    @AfterTest
+//    public void teardown() {
+//        driver.quit();
+//    }
 }

@@ -40,28 +40,28 @@ public class ResultsPage extends BasePage{
         sendKeysToElement(emailTxtFld, email);
     }
 
-    private By nameTxtFld = By.xpath("//div[@id=\"PaxTblForward\"]//input[@id=\"passengerNameForward0\"]");
-    public void setNameTxtFld(String name) {
+    public void setNameTxtFld(String name, int passengerIndex) {
+        By nameTxtFld = By.xpath("//div[@id=\"PaxTblForward\"]//input[@id=\"passengerNameForward" + passengerIndex + "\"]");
         sendKeysToElement(nameTxtFld, name);
     }
 
-    private By ageTxtFld = By.xpath("//div[@id=\"PaxTblForward\"]//input[@id=\"passengerAgeForward0\"]");
-    public void setAgeTxtFld(String age) {
+    public void setAgeTxtFld(String age, int passengerIndex) {
+        By ageTxtFld = By.xpath("//div[@id=\"PaxTblForward\"]//input[@id=\"passengerAgeForward" + passengerIndex + "\"]");
         sendKeysToElement(ageTxtFld, age);
     }
 
-    private By genderDropDown = By.xpath("//div[@id=\"PaxTblForward\"]//select[@id=\"genderCodeIdForward0\"]");
-    public WebElement getGenderDropDown() {
+    public WebElement getGenderDropDown(int passengerIndex) {
+        By genderDropDown = By.xpath("//div[@id=\"PaxTblForward\"]//select[@id=\"genderCodeIdForward" + passengerIndex + "\"]");
         return findElement(genderDropDown);
     }
 
-    private By concessionDropDown = By.xpath("//div[@id=\"PaxTblForward\"]//select[@id=\"concessionIdsForward0\"]");
-    public WebElement getConcessionDropDown() {
+    public WebElement getConcessionDropDown(int passengerIndex) {
+        By concessionDropDown = By.xpath("//div[@id=\"PaxTblForward\"]//select[@id=\"concessionIdsForward" + passengerIndex + "\"]");
         return findElement(concessionDropDown);
     }
 
-    private By countryDropDown = By.xpath("//div[@id=\"PaxTblForward\"]//select[@id=\"nationalityForward0\"]");
-    public WebElement getCountryDropDown() {
+    public WebElement getCountryDropDown(int passengerIndex) {
+        By countryDropDown = By.xpath("//div[@id=\"PaxTblForward\"]//select[@id=\"nationalityForward" + passengerIndex + "\"]");
         return findElement(countryDropDown);
     }
 
