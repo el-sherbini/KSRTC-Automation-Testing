@@ -6,7 +6,7 @@
 Clone the repo:
 
 ```sh
-git clone [https://github.com/el-sherbini/VOIS-Python-Task.git](https://github.com/el-sherbini/KSRTC-Test-Automation.git)
+git clone https://github.com/el-sherbini/KSRTC-Test-Automation.git
 ```
 
 Install dependencies:
