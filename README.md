@@ -1,12 +1,12 @@
-# KSRTC-Test-Automation
-> This is a test automation task for _VOIS on [_KSRTC_](https://ksrtc.in/oprs-web/guest/home.do?h=1) website (Indian Transporation Company).
+# KSRTC-Automation-Testing
+> This is a test automation project on [_KSRTC_](https://ksrtc.in/oprs-web/guest/home.do?h=1) website (Indian Transporation Company).
 
 ## Installation
 
 Clone the repo:
 
 ```sh
-git clone https://github.com/el-sherbini/KSRTC-Test-Automation.git
+git clone https://github.com/el-sherbini/KSRTC-Automation-Testing.git
 ```
 
 Install dependencies:
